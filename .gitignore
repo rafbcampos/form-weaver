@@ -1,0 +1,16 @@
+node_modules/
+dist/
+build/
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+*.log
+.DS_Store
+.env
+
+# CLI-generated optimized programs (loaded by server at startup)
+server/data/optimized/*.json

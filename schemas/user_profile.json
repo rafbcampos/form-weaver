@@ -1,0 +1,183 @@
+{
+  "fields": {
+    "personal": {
+      "type": "object",
+      "label": "Personal Information",
+      "fields": {
+        "first_name": {
+          "type": "string",
+          "label": "First Name",
+          "validation": [
+            { "type": "required" },
+            { "type": "min_length", "param": 2, "message": "Name must be at least 2 characters." }
+          ],
+          "conditions": [],
+          "options": [],
+          "fields": {}
+        },
+        "last_name": {
+          "type": "string",
+          "label": "Last Name",
+          "validation": [
+            { "type": "required" }
+          ],
+          "conditions": [],
+          "options": [],
+          "fields": {}
+        },
+        "email": {
+          "type": "string",
+          "label": "Email Address",
+          "validation": [
+            { "type": "required" },
+            { "type": "pattern", "param": "^[^@]+@[^@]+\\.[^@]+$", "message": "Please enter a valid email." }
+          ],
+          "conditions": [],
+          "options": [],
+          "fields": {}
+        },
+        "age": {
+          "type": "integer",
+          "label": "Age",
+          "validation": [
+            { "type": "required" },
+            { "type": "min", "param": 18, "message": "You must be at least 18 years old." },
+            { "type": "max", "param": 120 }
+          ],
+          "conditions": [],
+          "options": [],
+          "fields": {}
+        },
+        "marital_status": {
+          "type": "enum",
+          "label": "Marital Status",
+          "validation": [
+            { "type": "required" }
+          ],
+          "conditions": [],
+          "options": [
+            { "value": "single", "label": "Single" },
+            { "value": "married", "label": "Married" },
+            { "value": "divorced", "label": "Divorced" },
+            { "value": "widowed", "label": "Widowed" }
+          ],
+          "fields": {}
+        },
+        "spouse_name": {
+          "type": "string",
+          "label": "Spouse's Name",
+          "validation": [
+            { "type": "required" }
+          ],
+          "conditions": [
+            { "field": "personal.marital_status", "op": "eq", "value": "married" }
+          ],
+          "options": [],
+          "fields": {}
+        }
+      },
+      "validation": [],
+      "conditions": [],
+      "options": []
+    },
+    "employment": {
+      "type": "object",
+      "label": "Employment",
+      "fields": {
+        "status": {
+          "type": "enum",
+          "label": "Employment Status",
+          "validation": [
+            { "type": "required" }
+          ],
+          "conditions": [],
+          "options": [
+            { "value": "employed", "label": "Employed" },
+            { "value": "self_employed", "label": "Self-Employed" },
+            { "value": "unemployed", "label": "Unemployed" },
+            { "value": "student", "label": "Student" },
+            { "value": "retired", "label": "Retired" }
+          ],
+          "fields": {}
+        },
+        "company": {
+          "type": "string",
+          "label": "Company Name",
+          "validation": [
+            { "type": "required" }
+          ],
+          "conditions": [
+            { "field": "employment.status", "op": "in", "value": ["employed", "self_employed"] }
+          ],
+          "options": [],
+          "fields": {}
+        },
+        "job_title": {
+          "type": "string",
+          "label": "Job Title",
+          "validation": [
+            { "type": "required" }
+          ],
+          "conditions": [
+            { "field": "employment.status", "op": "in", "value": ["employed", "self_employed"] }
+          ],
+          "options": [],
+          "fields": {}
+        }
+      },
+      "validation": [],
+      "conditions": [],
+      "options": []
+    },
+    "children": {
+      "type": "array",
+      "label": "Children",
+      "validation": [],
+      "conditions": [],
+      "options": [],
+      "fields": {},
+      "item_schema": {
+        "type": "object",
+        "label": "Child",
+        "validation": [],
+        "conditions": [],
+        "options": [],
+        "fields": {
+          "name": {
+            "type": "string",
+            "label": "Child's Name",
+            "validation": [
+              { "type": "required" }
+            ],
+            "conditions": [],
+            "options": [],
+            "fields": {}
+          },
+          "age": {
+            "type": "integer",
+            "label": "Child's Age",
+            "validation": [
+              { "type": "required" },
+              { "type": "min", "param": 0 },
+              { "type": "max", "param": 100 }
+            ],
+            "conditions": [],
+            "options": [],
+            "fields": {}
+          }
+        }
+      }
+    },
+    "bio": {
+      "type": "text",
+      "label": "Short Bio",
+      "description": "Tell us a bit about yourself",
+      "validation": [
+        { "type": "max_length", "param": 500 }
+      ],
+      "conditions": [],
+      "options": [],
+      "fields": {}
+    }
+  }
+}
